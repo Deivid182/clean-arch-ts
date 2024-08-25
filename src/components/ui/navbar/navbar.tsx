@@ -1,14 +1,21 @@
 import { useState } from "react";
-
+import { ModalFavorites } from "@/components/ui";
+import { Bookmark } from "lucide-react";
 const Navbar = () => {
 
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
 
   const toggleNavbar = () => {
     setIsCollapsed(!isCollapsed);
   };
 
   return (
+   <>
+    <ModalFavorites
+      isOpen={isOpen}
+      onClose={() => setIsOpen(false)}
+    />
     <nav className="bg-white border-gray-200 dark:bg-gray-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a
@@ -92,10 +99,15 @@ const Navbar = () => {
                 Contact
               </a>
             </li>
+            <li className="py-2 px-3 md:p-0 space-x-2 cursor-pointer" onClick={() => setIsOpen(true)}>
+              <Bookmark size={20} className="inline-block"/>
+              <span className="md:hidden">Favorites</span>
+            </li>
           </ul>
         </div>
       </div>
     </nav>
+   </> 
   );
 };
 
