@@ -20,7 +20,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { SearchKey as SearchKeyType } from "@/models/search-key";
+import { SearchKey as SearchKeyType } from "@/models";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -62,12 +62,12 @@ export function DataTable<TData, TValue>({
           className="max-w-sm"
         />
         <select
-          id="countries"
+          id="search-key"
           value={searchKey}
           onChange={(e) => setSearchKey(e.target.value as SearchKeyType)}
           className="w-fit border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         >
-          <option>Select an option...</option>
+          <option value=''>Select an option...</option>
           <option value='name'>Name</option>
           <option value='category'>Category</option>
           <option value='company'>Company</option>
