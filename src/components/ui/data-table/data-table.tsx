@@ -20,20 +20,23 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { SearchKey as SearchKeyType } from "@/models";
+import { SearchKey } from "@/models";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  searchKey: string
+  onChangeSearchKey: (value: SearchKey) => void
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  searchKey,
+  onChangeSearchKey
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const [searchKey, setSearchKey] = useState<SearchKeyType>(SearchKeyType.NAME);
 
   const table = useReactTable({
     data,
@@ -64,7 +67,7 @@ export function DataTable<TData, TValue>({
         <select
           id="search-key"
           value={searchKey}
-          onChange={(e) => setSearchKey(e.target.value as SearchKeyType)}
+          onChange={(e) => onChangeSearchKey(e.target.value as SearchKey) }
           className="w-fit border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         >
           <option value=''>Select an option...</option>

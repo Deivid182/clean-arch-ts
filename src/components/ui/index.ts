@@ -1,4 +1,5 @@
 export * from './navbar'
 export * from './button'
 export * from './modal'
-export * from './modals'
+export * from './data-table'
+export * from './modals/modal-favotrites'

@@ -1,15 +1,21 @@
-import { useEffect } from "react"
+import { useState, useEffect } from "react"
 import { useAppDispatch, useAppSelector } from "@/hooks"
 import { addPeople } from "@/app/features"
 import { People as data } from "@/data/people"
-import { columns } from "@/components/ui/people/columns"
-import { DataTable } from "@/components/ui/people/data-table"
-
+import { columns } from '@/pages/home/columns'
+import { DataTable } from "@/components/ui/data-table"
+import { SearchKey as SearchKeyType } from "@/models" 
 
 const Home = () => {
 
+  const [searchKey, setSearchKey] = useState<SearchKeyType>(SearchKeyType.NAME)
   const statePeople = useAppSelector(state => state.people);
+
   const dispatch = useAppDispatch();
+
+  const onChangeSearchKey = (value: SearchKeyType) => {
+    setSearchKey(value)
+  }
 
   useEffect(() => {
     dispatch(addPeople(data))
@@ -18,7 +24,7 @@ const Home = () => {
 
   return (
     <div className="container mx-auto py-10">
-      <DataTable columns={columns} data={statePeople} />
+      <DataTable columns={columns} data={statePeople} searchKey={searchKey} onChangeSearchKey={onChangeSearchKey} />
     </div>
   )
 }
